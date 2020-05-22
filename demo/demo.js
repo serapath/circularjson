@@ -1,21 +1,12 @@
-# jsonloop
-JSON.{parse, stringify} compatible for circular JSON
+const jsonloop = require('..')
 
-https://www.npmjs.com/package/jsonloop
-
-https://serapath.github.io/jsonloop/
-
-# use
-`npm install jsonloop`
-```js
-const jsonloop = require('jsonloop')
 const defaultSeperator = '.'
 const cJSON = jsonloop(defaultSeperator)
 
-var obj2 = { foo: { bar: [{ x: 'y'}, { y: 'x' }], xx: { yy: 'zz' } }, a: 'b' }
-obj2.foo.bar.push(obj2.foo.xx)
+var obj = { foo: { bar: [{ x: 'y'}, { y: 'x' }], xx: { yy: 'zz' } }, a: 'b' }
+obj.foo.bar.push(obj.foo.xx)
 
-const json = cJSON.stringify(obj2, 0, 2)
+const json = cJSON.stringify(obj, 0, 2)
 console.log(json) /* {
   "foo": {
     "bar": [
@@ -33,6 +24,7 @@ console.log(json) /* {
   },
   "a": "b"
 } */
+if (typeof window) document.write(`<xmp>${json}</xmp>`)
 const obj2 = cJSON.parse(json)
 console.log(obj2) /*{
   "foo": {
@@ -51,4 +43,3 @@ console.log(obj2) /*{
   },
   "a": "b"
 } */
-```

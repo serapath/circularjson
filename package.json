@@ -1,0 +1,34 @@
+{
+  "name": "jsonloop",
+  "version": "0.0.0",
+  "description": "JSON.{parse, stringify} compatible for circular JSON",
+  "main": "src/jsonloop.js",
+  "scripts": {
+    "start": "budo demo/demo.js:bundle.js --ssl --open --live --dir .",
+    "build": "browserify demo/demo.js -o bundle.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/serapath/jsonloop.git"
+  },
+  "keywords": [
+    "JSON",
+    "circular",
+    "parse",
+    "parser",
+    "stringify",
+    "json",
+    "object",
+    "circle"
+  ],
+  "author": "@serapath",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/serapath/jsonloop/issues"
+  },
+  "homepage": "https://github.com/serapath/jsonloop#readme",
+  "devDependencies": {
+    "budo": "^11.6.3"
+  }
+}
