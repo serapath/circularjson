@@ -21,11 +21,11 @@ function jsonloop (specialChar = '.') {
     return JSON.stringify(value, replace, space)
   }
   function generateReplacer (value, replacer, resolve) {
+    replacer = typeof replacer === 'object' ? (key, value) => key !== '' && indexOf.call(replacer, key) < 0 ? void 0 : value : replacer
     const path = []
     const all  = [value]
     const seen = [value]
     const mapp = [specialChar]
-    const fn = typeof replacer === 'object' ? (key, value) => key !== '' && indexOf.call(replacer, key) < 0 ? void 0 : value : replacer
     var doNotIgnore = false
     var last = value
     var lvl  = 1
@@ -36,8 +36,7 @@ function jsonloop (specialChar = '.') {
         // if a new object should be returned
         // or if there's some key to drop
         // let's call it here rather than "too late"
-        if (fn) value = fn.call(this, key, value)
-        
+        if (replacer) value = replacer.call(this, key, value)
         if (doNotIgnore) { // first pass should be ignored, since it's just the initial object
           if (last !== this) {
             i = lvl - indexOf.call(all, this) - 1
@@ -46,7 +45,6 @@ function jsonloop (specialChar = '.') {
             path.splice(lvl - 1, path.length)
             last = this
           }
-          // console.log(lvl, key, path)
           if (typeof value === 'object' && value) {
             // if object isn't referring to parent object, add to the
             // object path stack. Otherwise it is already there.
@@ -60,7 +58,6 @@ function jsonloop (specialChar = '.') {
               mapp[i] = specialChar + path.join(specialChar)
             } else {
               value = `#${mapp[i]}` // https://tools.ietf.org/html/rfc6901
-              console.log(value)
             }
           } else {
             if (typeof value === 'string' && resolve) {

@@ -1,6 +1,6 @@
 {
   "name": "jsonloop",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "JSON.{parse, stringify} compatible for circular JSON",
   "main": "src/jsonloop.js",
   "scripts": {
